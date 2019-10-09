@@ -8,7 +8,6 @@ const autoprefixer = require('gulp-autoprefixer');
 const cleancss = require('gulp-clean-css');
 const imagemin = require('gulp-imagemin');
 const plumber = require('gulp-plumber');
-const browserify = require('gulp-browserify');
 
 /*
 --TOP LEVEL FUNCTIONS
@@ -26,7 +25,6 @@ gulp.task('scripts', () => {
                 this.emit('end');
             }
         }))
-        .pipe(browserify())
         .pipe(babel())
         .pipe(concat('main.js'))
         .pipe(gulp.dest('dist/js'))
@@ -44,7 +42,7 @@ gulp.task('styles', () => {
             }
         }))
         .pipe(sass())
-        .pipe(autoprefixer({ browsers: ['last 2 versions'] }))
+        .pipe(autoprefixer())
         .pipe(gulp.dest('dist/css'))
         .pipe(rename({ suffix: '.min' }))
         .pipe(cleancss())
